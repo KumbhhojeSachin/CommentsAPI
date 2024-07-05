@@ -27,7 +27,7 @@ import com.Comments.service.CommentsService;
  *
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v2")
 public class CommentsController {
 
 	public final static Logger logger = LoggerFactory.getLogger(CommentsController.class);
