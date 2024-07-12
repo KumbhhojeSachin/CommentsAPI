@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.xml.stream.events.Comment;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +79,10 @@ public class CommentsServiceImpl implements CommentsService {
 	public List<Comments> getByDate(Date date) {
 		logger.info("CommentsServiceImpl -> getByDate Method is START");
 		return commentsRepository.findByDateOfComment(date);
+	}
+
+	public List<Comments> findByDateAndName(Date date, String name) {
+		return commentsRepository.findByDateAndName(date, name);
 	}
 
 }

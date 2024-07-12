@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
  *
  */
 @Entity
-@Table(name = "Comments_Table")
+@Table(name = "Comments_Table", schema = "public")
 public class Comments implements Serializable {
 
 	private static final long serialVersionUID = 1L;

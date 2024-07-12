@@ -3,6 +3,7 @@ package com.Comments.service;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -28,4 +29,6 @@ public interface CommentsService {
 	public Comments update(BigInteger id, Comments comments);
 
 	public void delete(BigInteger id);
+
+	public List<Comments> findByDateAndName(Date date, String name);
 }

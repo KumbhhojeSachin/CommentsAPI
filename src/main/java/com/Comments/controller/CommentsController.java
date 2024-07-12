@@ -3,11 +3,13 @@ package com.Comments.controller;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +49,14 @@ public class CommentsController {
 		logger.info("CommentsController -> getByDates Method START");
 		return commentsService.getByDate(date);
 	}
+	
+	@GetMapping("/search/datename")
+	public ResponseEntity<List<Comments>> getCommentsByDateAndName(
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)Date date,
+            @RequestParam("name") String name) {
+        List<Comments> comments = commentsService.findByDateAndName(date, name);
+        return new ResponseEntity<>(comments, HttpStatus.OK);
+    }
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Comments> getCommentsById(@PathVariable("id") BigInteger id) {
@@ -63,6 +73,7 @@ public class CommentsController {
 	@PostMapping
 	public ResponseEntity<Comments> createComments(@RequestBody Comments comments) {
 		logger.info("CommentsController -> createComments Method START");
+		
 		return ResponseEntity.ok(commentsService.save(comments));
 	}
 
@@ -72,7 +83,7 @@ public class CommentsController {
 		return ResponseEntity.ok(commentsService.update(id, comments));
 	}
 
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Comments> deleteComments(@PathVariable("id") BigInteger id) {
 		logger.info("CommentsController -> deleteComments Method START");
 		commentsService.delete(id);
